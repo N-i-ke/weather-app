@@ -62,9 +62,12 @@ const Weather: React.FC = () => {
 
   return (
     <div className="weather-container">
+      <h2 className="font-bold text-2xl mb-4">お天気表示アプリケーション</h2>
+      <br />
       <select
         value={selectedCity}
         onChange={(e) => setSelectedCity(e.target.value)}
+        className="p-2 border border-gray-300 rounded-md mb-4"
       >
         {Object.entries(cityNames).map(([englishName, japaneseName]) => (
           <option key={englishName} value={englishName}>
@@ -72,22 +75,28 @@ const Weather: React.FC = () => {
           </option>
         ))}
       </select>
-      {loading ? (
-        <p>ローディング中...</p>
-      ) : weatherData ? (
-        <div className="weather-info">
-          <h2>{cityNames[weatherData.name]}</h2>
-          <p>選択中の都市: {cityNames[selectedCity]}</p>
-          <p>気温: {weatherData.main.temp}°C</p>
-          <p>天気: {weatherData.weather[0].description}</p>
-          <p>
-            風速: {weatherData.wind.speed} m/s, 風向: {weatherData.wind.deg}°
-          </p>
-          <p>湿度: {weatherData.main.humidity}%</p>
-        </div>
-      ) : (
-        <p>参照するデータがありません</p>
-      )}
+      <div className="min-h-[200px] w-full flex items-center justify-center">
+        {loading ? (
+          <p className="text-center text-gray-500">ローディング中...</p>
+        ) : weatherData ? (
+          <div className="bg-white p-6 rounded-lg shadow-md text-center w-full">
+            <h2 className="text-2xl font-bold mb-2">
+              {cityNames[weatherData.name]}
+            </h2>
+            <p className="text-left">選択中の都市: {cityNames[selectedCity]}</p>
+            <p className="text-left">気温: {weatherData.main.temp}°C</p>
+            <p className="text-left">
+              天気: {weatherData.weather[0].description}
+            </p>
+            <p className="text-left">
+              風速: {weatherData.wind.speed} m/s, 風向: {weatherData.wind.deg}°
+            </p>
+            <p className="text-left">湿度: {weatherData.main.humidity}%</p>
+          </div>
+        ) : (
+          <p className="text-center text-red-500">参照するデータがありません</p>
+        )}
+      </div>
     </div>
   );
 };
