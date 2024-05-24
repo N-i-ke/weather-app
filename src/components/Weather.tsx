@@ -16,18 +16,19 @@ interface WeatherData {
   };
 }
 
-const cities = [
-  "Tokyo",
-  "Osaka",
-  "Nagoya",
-  "Sapporo",
-  "Fukuoka",
-  "Yokohama",
-  "Kyoto",
-  "Kobe",
-  "Sendai",
-  "Hiroshima",
-];
+// 英語名と日本語名の対応表
+const cityNames: { [key: string]: string } = {
+  Tokyo: "東京",
+  Osaka: "大阪",
+  Nagoya: "名古屋",
+  Sapporo: "札幌",
+  Fukuoka: "福岡",
+  Yokohama: "横浜",
+  Kyoto: "京都",
+  Kobe: "神戸",
+  Sendai: "仙台",
+  Hiroshima: "広島",
+};
 
 const Weather: React.FC = () => {
   const [selectedCity, setSelectedCity] = useState<string>("Tokyo");
@@ -47,7 +48,7 @@ const Weather: React.FC = () => {
               units: "metric",
               appid: process.env.REACT_APP_WEATHER_API_KEY,
             },
-          },
+          }
         );
         setWeatherData(response.data);
       } catch (error) {
@@ -65,9 +66,9 @@ const Weather: React.FC = () => {
         value={selectedCity}
         onChange={(e) => setSelectedCity(e.target.value)}
       >
-        {cities.map((city) => (
-          <option key={city} value={city}>
-            {city}
+        {Object.entries(cityNames).map(([englishName, japaneseName]) => (
+          <option key={englishName} value={englishName}>
+            {japaneseName}
           </option>
         ))}
       </select>
@@ -75,7 +76,8 @@ const Weather: React.FC = () => {
         <p>ローディング中...</p>
       ) : weatherData ? (
         <div className="weather-info">
-          <h2>{weatherData.name}</h2>
+          <h2>{cityNames[weatherData.name]}</h2>
+          <p>選択中の都市: {cityNames[selectedCity]}</p>
           <p>気温: {weatherData.main.temp}°C</p>
           <p>天気: {weatherData.weather[0].description}</p>
           <p>
