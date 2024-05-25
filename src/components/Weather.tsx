@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTemperatureThreeQuarters,
+  faSun,  
+  faCloud,
+  faWind,
+  faCity,
+  faTemperatureHigh,
+} from "@fortawesome/free-solid-svg-icons";
 
 interface WeatherData {
   name: string;
@@ -51,6 +60,7 @@ const Weather: React.FC = () => {
           }
         );
         setWeatherData(response.data);
+        console.log(response.data)
       } catch (error) {
         console.error("Error fetching weather data", error);
       } finally {
@@ -83,15 +93,39 @@ const Weather: React.FC = () => {
             <h2 className="text-2xl font-bold mb-2">
               {cityNames[weatherData.name]}
             </h2>
-            <p className="text-left">選択中の都市: {cityNames[selectedCity]}</p>
-            <p className="text-left">気温: {weatherData.main.temp}°C</p>
-            <p className="text-left">
+            <p className="justify-start text-left flex items-center gap-5">
+              <div>
+                <FontAwesomeIcon icon={faCity} />
+              </div>
+              選択中の都市: {cityNames[selectedCity]}
+            </p>
+            <p className="justify-start text-left flex items-center gap-5">
+              <div>
+                <FontAwesomeIcon
+                  icon={faTemperatureThreeQuarters}
+                  className="w-5 h-6"
+                />
+              </div>
+              気温: {weatherData.main.temp}°C
+            </p>
+            <p className="justify-start text-left flex items-center gap-5">
+              <div>
+                <FontAwesomeIcon icon={faCloud} />
+              </div>
               天気: {weatherData.weather[0].description}
             </p>
-            <p className="text-left">
+            <p className="justify-start text-left flex items-center gap-5">
+              <div>
+                <FontAwesomeIcon icon={faWind} />
+              </div>
               風速: {weatherData.wind.speed} m/s, 風向: {weatherData.wind.deg}°
             </p>
-            <p className="text-left">湿度: {weatherData.main.humidity}%</p>
+            <p className="justify-start text-left flex items-center gap-5">
+              <div>
+                <FontAwesomeIcon icon={faTemperatureHigh} />
+              </div>
+              湿度: {weatherData.main.humidity}%
+            </p>
           </div>
         ) : (
           <p className="text-center text-red-500">参照するデータがありません</p>
