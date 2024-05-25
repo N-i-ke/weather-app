@@ -64,6 +64,24 @@ const Weather: React.FC = () => {
           }
         );
         setWeatherData(response.data);
+
+        let background;
+        switch (response.data.weather[0].main) {
+          case "Clear":
+            background = "yellow";
+            break;
+          case "Clouds":
+            background = "gray";
+            break;
+          case "Rain":
+            background = "blue";
+            break;
+          default:
+            background = "white";
+            break;
+        }
+        document.body.style.backgroundColor = background;
+        
         console.log(response.data)
       } catch (error) {
         console.error("Error fetching weather data", error);
@@ -126,7 +144,7 @@ const Weather: React.FC = () => {
           </option>
         ))}
       </select>
-      <div className="min-h-[200px] w-full flex items-center justify-center">
+      <div className=" w-full flex items-center justify-center">
         {loading ? (
           <p className="text-center text-gray-500">ローディング中...</p>
         ) : weatherData ? (
