@@ -7,6 +7,9 @@ import {
   faCloud,
   faWind,
   faCity,
+  faCloudRain,
+  faSnowflake,
+  faQuestion,
   faTemperatureHigh,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -17,6 +20,7 @@ interface WeatherData {
     humidity: number;
   };
   weather: {
+    main: string,
     description: string;
   }[];
   wind: {
@@ -73,6 +77,43 @@ const Weather: React.FC = () => {
   return (
     <div className="weather-container">
       <h2 className="font-bold text-2xl mb-4">お天気表示アプリケーション</h2>
+      <br />
+      <div className="flex justify-center gap-4">
+        {weatherData && (
+          <>
+            {weatherData.weather[0].main === "Clear" && (
+              <div className="text-yellow-400">
+                <FontAwesomeIcon icon={faSun} className="w-8 h-8" />
+                <span>晴れ</span>
+              </div>
+            )}
+            {weatherData.weather[0].main === "Clouds" && (
+              <div className="text-gray-400">
+                <FontAwesomeIcon icon={faCloud} className="w-8 h-8" />
+                <span>曇り</span>
+              </div>
+            )}
+            {weatherData.weather[0].main === "Rain" && (
+              <div className="text-blue-400">
+                <FontAwesomeIcon icon={faCloudRain} className="w-8 h-8" />
+                <span>雨</span>
+              </div>
+            )}
+            {weatherData.weather[0].main === "Snow" && (
+              <div className="text-blue-200">
+                <FontAwesomeIcon icon={faSnowflake} className="w-8 h-8" />
+                <span>雪</span>
+              </div>
+            )}
+          </>
+        )}
+        {!weatherData && (
+          <div className="text-gray-400">
+            <FontAwesomeIcon icon={faQuestion} className="w-8 h-8" />
+            <span>天気情報がありません</span>
+          </div>
+        )}
+      </div>
       <br />
       <select
         value={selectedCity}
