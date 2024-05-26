@@ -102,7 +102,9 @@ const Weather: React.FC = () => {
 
   return (
     <div className="weather-container">
-      <h2 className="font-bold text-2xl mb-4">お天気表示アプリケーション</h2>
+      <h2 className="font-bold text-2xl mb-4 text-white">
+        お天気表示アプリケーション
+      </h2>
       <br />
       <div className="bg-white rounded-lg py-4 flex justify-center gap-4">
         {weatherData && (
