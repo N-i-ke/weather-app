@@ -8,25 +8,30 @@
 
 1. プロジェクトをクローンします。
 
-```bash
+```
 git clone https://github.com/your-username/weather-app.git
-
+```
 2.  プロジェクトディレクトリに移動します。
 
-```bash
+```
 cd weather-app
+```
 
 3.  依存関係をインストールします。
 
-```bash
-npm isntall
+```
+npm install
+```
 
 4. OpenWeatherMapからAPIキーを取得し、プロジェクトの環境変数に設定します。
 
-```bash
+```
+.env
 export REACT_APP_WEATHER_API_KEY=your-api-key
+```
 
 5. アプリケーションを起動します。
 
-```bash
+```
 npm start
+```
