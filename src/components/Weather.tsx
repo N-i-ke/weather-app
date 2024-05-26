@@ -12,6 +12,10 @@ import {
   faQuestion,
   faTemperatureHigh,
 } from "@fortawesome/free-solid-svg-icons";
+import clearImage from "../Images/clear.png";
+import cloudsImage from "../Images/clouds.png";
+import rainImage from "../Images/rainy.png";
+import snowImage from "../Images/snow.png";
 
 interface WeatherData {
   name: string;
@@ -65,22 +69,26 @@ const Weather: React.FC = () => {
         );
         setWeatherData(response.data);
 
-        let background;
-        switch (response.data.weather[0].main) {
-          case "Clear":
-            background = "yellow";
-            break;
-          case "Clouds":
-            background = "gray";
-            break;
-          case "Rain":
-            background = "blue";
-            break;
-          default:
-            background = "white";
-            break;
-        }
-        document.body.style.backgroundColor = background;
+                let backgroundImage;
+                switch (response.data.weather[0].main) {
+                  case "Clear":
+                    backgroundImage = `url(${clearImage})`;
+                    break;
+                  case "Clouds":
+                    backgroundImage = `url(${cloudsImage})`;
+                    break;
+                  case "Rain":
+                    backgroundImage = `url(${rainImage})`;
+                    break;
+                  case "Snow":
+                    backgroundImage = `url(${snowImage})`;
+                    break;
+                  default:
+                    backgroundImage = "none";
+                    break;
+                }
+                document.body.style.backgroundImage = backgroundImage;
+                document.body.style.backgroundSize = "cover"; 
         
         console.log(response.data)
       } catch (error) {
@@ -96,7 +104,7 @@ const Weather: React.FC = () => {
     <div className="weather-container">
       <h2 className="font-bold text-2xl mb-4">お天気表示アプリケーション</h2>
       <br />
-      <div className="flex justify-center gap-4">
+      <div className="bg-white rounded-lg py-4 flex justify-center gap-4">
         {weatherData && (
           <>
             {weatherData.weather[0].main === "Clear" && (
