@@ -25,6 +25,9 @@ npm install
 
 4. OpenWeatherMapからAPIキーを取得し、プロジェクトの環境変数に設定します。
 
+OpenWeatherMapのURL↓
+https://openweathermap.org/
+
 ```
 .env
 export REACT_APP_WEATHER_API_KEY=your-api-key
